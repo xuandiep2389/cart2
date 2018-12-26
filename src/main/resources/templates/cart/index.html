@@ -6,7 +6,6 @@
 </head>
 <body>
 <h3>Cart info</h3>
-<a href="/products">Products</a>
 <div>
     <table border="1">
         <tr>
@@ -26,6 +25,7 @@
             <td th:text="${item.product.price * item.quantity}"></td>
         </tr>
     </table>
+    <a href="/products">Continue shopping</a>
 </div>
 </body>
 </html>
