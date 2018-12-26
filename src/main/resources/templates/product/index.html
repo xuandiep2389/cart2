@@ -19,7 +19,7 @@
             <tr>
                 <td th:text="${product.id}"></td>
                 <td th:text="${product.name}"></td>
-                <td><img th:src="${product.photo}" th:width="50px"></td>
+                <td><img th:src="${product.photo}" th:width="100px"></td>
                 <td th:text="${product.price}"></td>
                 <td><a th:href="@{/cart/buy/__${product.id}__}">Buy now</a></td>
             </tr>
