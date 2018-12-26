@@ -25,6 +25,9 @@
             <td th:text="${item.product.price * item.quantity}"></td>
         </tr>
     </table>
+    <div>
+       Total: <span th:text="${session.totalMoney}"></span>
+    </div>
     <a href="/products">Continue shopping</a>
 </div>
 </body>

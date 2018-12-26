@@ -29,12 +29,13 @@ public class CartController {
     @GetMapping("/buy/{id}")
     public ModelAndView buy(@PathVariable("id") int id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("redirect:/cart");
+        List<Item> cart;
         if (session.getAttribute("cart") == null){
-            List<Item> cart = new ArrayList<Item>();
+            cart = new ArrayList<Item>();
             cart.add(new Item(productService.findById(id), 1));
             session.setAttribute("cart", cart);
         } else {
-            List<Item> cart = (List<Item>) session.getAttribute("cart");
+            cart = (List<Item>) session.getAttribute("cart");
             int index = isExists(id, cart);
             if (index == -1) {
                 cart.add(new Item(productService.findById(id), 1));
@@ -44,6 +45,7 @@ public class CartController {
             }
             session.setAttribute("cart", cart);
         }
+        session.setAttribute("totalMoney", totalPrice(cart));
         return modelAndView;
     }
 
@@ -54,5 +56,15 @@ public class CartController {
             }
         }
         return -1;
+    }
+
+    private long totalPrice(List<Item> cart) {
+        int totalMoney = 0;
+        if (cart.size() > 0) {
+            for (int i = 0; i < cart.size(); i++) {
+                totalMoney += (cart.get(i).getQuantity() * cart.get(i).getProduct().getPrice());
+            }
+        }
+        return totalMoney;
     }
 }
