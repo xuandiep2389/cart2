@@ -34,8 +34,25 @@ public class CartController {
             cart.add(new Item(productService.findById(id), 1));
             session.setAttribute("cart", cart);
         } else {
-
+            List<Item> cart = (List<Item>) session.getAttribute("cart");
+            int index = isExists(id, cart);
+            if (index == -1) {
+                cart.add(new Item(productService.findById(id), 1));
+            }else {
+                int quantity = cart.get(index).getQuantity() + 1;
+                cart.get(index).setQuantity(quantity);
+            }
+            session.setAttribute("cart", cart);
         }
         return modelAndView;
+    }
+
+    private int isExists(int id, List<Item> cart) {
+        for (int i = 0; i < cart.size() ; i++) {
+            if (cart.get(i).getProduct().getId() == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
