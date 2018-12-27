@@ -23,8 +23,9 @@ public class CartController {
     public ProductService productService;
 
     @GetMapping("")
-    public ModelAndView showIndex() {
+    public ModelAndView showIndex(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("cart/index");
+        modelAndView.addObject("totalMoney", totalMoney(session));
         return modelAndView;
     }
 
@@ -83,6 +84,16 @@ public class CartController {
             }
         }
         return -1;
+    }
+
+    private double totalMoney(HttpSession session) {
+        double totalMoney = 0;
+        List<Item> cart;
+        cart = (List<Item>) session.getAttribute("cart");
+        for (Item item : cart) {
+            totalMoney += item.getQuantity() * item.getProduct().getPrice();
+        }
+        return totalMoney;
     }
 
 }
