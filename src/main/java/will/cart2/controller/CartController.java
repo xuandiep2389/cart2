@@ -76,6 +76,17 @@ public class CartController {
         return modelAndView;
     }
 
+    @GetMapping("/checkout")
+    public ModelAndView checkout(HttpSession session) {
+       if (session.getAttribute("username") == null) {
+            ModelAndView modelAndView = new ModelAndView("redirect:/account");
+            return modelAndView;
+       } else {
+           ModelAndView modelAndView = new ModelAndView("orders/thanks");
+           return modelAndView;
+       }
+    }
+
 
     private int isExists(int id, List<Item> cart) {
         for (int i = 0; i < cart.size() ; i++) {
