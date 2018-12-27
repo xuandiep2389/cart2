@@ -22,12 +22,7 @@ public class CartController {
     @Autowired
     public ProductService productService;
 
-    @GetMapping("")
-    public ModelAndView showIndex(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("cart/index");
-        modelAndView.addObject("totalMoney", totalMoney(session));
-        return modelAndView;
-    }
+
 
     @GetMapping("/buy/{id}")
     public ModelAndView buy(@PathVariable("id") int id, HttpSession session) {
@@ -48,9 +43,16 @@ public class CartController {
             }
             session.setAttribute("cart", cart);
         }
+        session.setAttribute("total_money", totalMoney(cart));
         return modelAndView;
     }
 
+    @GetMapping("")
+    public ModelAndView showIndex(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("cart/index");
+       // modelAndView.addObject("totalMoney", totalMoney(session));
+        return modelAndView;
+    }
 
     @GetMapping("/remove/{id}")
     public ModelAndView removeItem(@PathVariable("id") int id, HttpSession session) {
@@ -73,6 +75,7 @@ public class CartController {
             cart.get(i).setQuantity(Integer.parseInt(quantities[i]));
         }
         session.setAttribute("cart", cart);
+        session.setAttribute("total_money", totalMoney(cart));
         return modelAndView;
     }
 
@@ -97,10 +100,8 @@ public class CartController {
         return -1;
     }
 
-    private double totalMoney(HttpSession session) {
+    private double totalMoney(List<Item> cart) {
         double totalMoney = 0;
-        List<Item> cart;
-        cart = (List<Item>) session.getAttribute("cart");
         for (Item item : cart) {
             totalMoney += item.getQuantity() * item.getProduct().getPrice();
         }

@@ -22,26 +22,28 @@
                 </th>
                 <th>Sub Total</th>
             </tr>
-            <th:block th:if="cart">
-                <tr th:each="item : ${session.cart}">
-                    <td align="center">
-                        <a th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
-                    </td>
-                    <td th:text="${item.product.id}"></td>
-                    <td th:text="${item.product.name}"></td>
-                    <td><img th:src="${item.product.photo}" width="100px"></td>
-                    <td th:text="${item.product.price}"></td>
-                    <td>
-                        <input type="number" th:value="${item.quantity}" name="quantity" style="width: 100px">
-                    </td>
-                    <td th:text="${item.product.price * item.quantity}"></td>
-                </tr>
+            <th:block th:if="${session.cart}">
+                    <tr th:each="item : ${session.cart}">
+                        <td align="center">
+                            <a th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
+                        </td>
+                        <td th:text="${item.product.id}"></td>
+                        <td th:text="${item.product.name}"></td>
+                        <td><img th:src="${item.product.photo}" width="100px"></td>
+                        <td th:text="${item.product.price}"></td>
+                        <td>
+                            <input type="number" th:value="${item.quantity}" name="quantity" style="width: 100px">
+                        </td>
+                        <td th:text="${item.product.price * item.quantity}"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="6">Total:</td>
+                        <td th:text="${session.total_money}"></td>
+                    </tr>
             </th:block>
 
-            <tr>
-                <td colspan="6">Total:</td>
-                <td th:text="${totalMoney}"></td>
-            </tr>
         </table>
         <a href="/products">Continue shopping</a> |
         <a href="/cart/checkout">Checkout</a>
