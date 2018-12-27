@@ -6,33 +6,39 @@
 </head>
 <body>
 <h3>Cart info</h3>
-<div>
-    <table border="1">
-        <tr>
-            <th>Option</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
-        </tr>
-        <tr th:each="item : ${session.cart}">
-            <td align="center">
-                <a th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
-            </td>
-            <td th:text="${item.product.id}"></td>
-            <td th:text="${item.product.name}"></td>
-            <td><img th:src="${item.product.photo}" width="100px"></td>
-            <td th:text="${item.product.price}"></td>
-            <td th:text="${item.quantity}"></td>
-            <td th:text="${item.product.price * item.quantity}"></td>
-        </tr>
-    </table>
+
+<form method="post" th:action="@{/cart/update}">
     <div>
-       Total: <span th:text="${session.totalMoney}"></span>
+        <table border="1">
+            <tr>
+                <th>Option</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>
+                    Quantity
+                    <input type="submit" value="Update">
+                </th>
+                <th>Sub Total</th>
+            </tr>
+            <tr th:each="item : ${session.cart}">
+                <td align="center">
+                    <a th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
+                </td>
+                <td th:text="${item.product.id}"></td>
+                <td th:text="${item.product.name}"></td>
+                <td><img th:src="${item.product.photo}" width="100px"></td>
+                <td th:text="${item.product.price}"></td>
+                <td>
+                    <input type="number" th:value="${item.quantity}" name="quantity" style="width: 100px">
+                </td>
+                <td th:text="${item.product.price * item.quantity}"></td>
+            </tr>
+        </table>
+        <a href="/products">Continue shopping</a>
     </div>
-    <a href="/products">Continue shopping</a>
-</div>
+</form>
+
 </body>
 </html>

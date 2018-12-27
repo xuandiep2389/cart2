@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import will.cart2.model.Item;
 import will.cart2.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,6 @@ public class CartController {
             }
             session.setAttribute("cart", cart);
         }
-        session.setAttribute("totalMoney", totalPrice(cart));
         return modelAndView;
     }
 
@@ -61,6 +62,20 @@ public class CartController {
         return modelAndView;
     }
 
+    @PostMapping("/update")
+    public ModelAndView updateCart(HttpSession session, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/cart");
+        String[] quantities = request.getParameterValues("quantity");
+        List<Item> cart;
+        cart = (List<Item>) session.getAttribute("cart");
+        for (int i = 0; i < cart.size(); i++) {
+            cart.get(i).setQuantity(Integer.parseInt(quantities[i]));
+        }
+        session.setAttribute("cart", cart);
+        return modelAndView;
+    }
+
+
     private int isExists(int id, List<Item> cart) {
         for (int i = 0; i < cart.size() ; i++) {
             if (cart.get(i).getProduct().getId() == id) {
@@ -70,13 +85,4 @@ public class CartController {
         return -1;
     }
 
-    private long totalPrice(List<Item> cart) {
-        int totalMoney = 0;
-         if (cart.size() > 0) {
-            for (int i = 0; i < cart.size(); i++) {
-                totalMoney += (cart.get(i).getQuantity() * cart.get(i).getProduct().getPrice());
-            }
-        }
-        return totalMoney;
-    }
 }
