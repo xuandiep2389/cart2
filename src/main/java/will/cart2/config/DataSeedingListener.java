@@ -3,7 +3,7 @@ package will.cart2.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import will.cart2.model.Account;
 import will.cart2.model.Role;
@@ -22,8 +22,8 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
@@ -39,7 +39,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (accountRepository.findByUsername("admin") == null) {
             Account admin = new Account();
             admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("1"));
+            admin.setPassword("1");
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_ADMIN"));
             admin.setRoles(roles);
@@ -49,7 +49,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (accountRepository.findByUsername("member") == null) {
             Account member = new Account();
             member.setUsername("member");
-            member.setPassword(passwordEncoder.encode("1"));
+            member.setPassword("1");
             HashSet<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_MEMBER"));
             member.setRoles(roles);
