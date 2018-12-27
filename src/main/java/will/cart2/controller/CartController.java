@@ -49,6 +49,18 @@ public class CartController {
         return modelAndView;
     }
 
+
+    @GetMapping("/remove/{id}")
+    public ModelAndView removeItem(@PathVariable("id") int id, HttpSession session) {
+        List<Item> cart;
+        cart = (List<Item>) session.getAttribute("cart");
+        int index = isExists(id, cart);
+        cart.remove(index);
+        session.setAttribute("cart", cart);
+        ModelAndView modelAndView = new ModelAndView("redirect:/cart");
+        return modelAndView;
+    }
+
     private int isExists(int id, List<Item> cart) {
         for (int i = 0; i < cart.size() ; i++) {
             if (cart.get(i).getProduct().getId() == id) {
@@ -60,7 +72,7 @@ public class CartController {
 
     private long totalPrice(List<Item> cart) {
         int totalMoney = 0;
-        if (cart.size() > 0) {
+         if (cart.size() > 0) {
             for (int i = 0; i < cart.size(); i++) {
                 totalMoney += (cart.get(i).getQuantity() * cart.get(i).getProduct().getPrice());
             }

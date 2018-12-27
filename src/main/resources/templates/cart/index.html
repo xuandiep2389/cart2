@@ -9,6 +9,7 @@
 <div>
     <table border="1">
         <tr>
+            <th>Option</th>
             <th>Id</th>
             <th>Name</th>
             <th>Photo</th>
@@ -17,6 +18,9 @@
             <th>Sub Total</th>
         </tr>
         <tr th:each="item : ${session.cart}">
+            <td align="center">
+                <a th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
+            </td>
             <td th:text="${item.product.id}"></td>
             <td th:text="${item.product.name}"></td>
             <td><img th:src="${item.product.photo}" width="100px"></td>
