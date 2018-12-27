@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View order details</title>
+</head>
+<body>
+<h3>Your order details</h3>
+<form>
+    <div>
+        <table border="1">
+            <tr>
+                <td>Name:</td>
+                <td  th:text="${session.order1.customerName}"></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td  th:text="${session.order1.customerAddress}"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td  th:text="${session.order1.customerEmail}"></td>
+            </tr>
+            <tr>
+                <td>Phone number:</td>
+                <td  th:text="${session.order1.customerPhone}"></td>
+            </tr>
+            <tr>
+                <td>Order date:</td>
+                <td  th:text="${session.order1.orderDate}"></td>
+            </tr>
+
+        </table>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            <th:block th:if="${session.cart}">
+                <tr th:each="item : ${session.cart}">
+                    <td th:text="${item.product.name}"></td>
+                    <td><img th:src="${item.product.photo}" width="100px"></td>
+                    <td th:text="${item.product.price}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.product.price * item.quantity}"></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="4">Total:</td>
+                    <td th:text="${session.total_money}"></td>
+                </tr>
+            </th:block>
+
+        </table>
+    </div>
+    <input type="submit" value="Send">
+</form>
+
+</body>
+</html>
