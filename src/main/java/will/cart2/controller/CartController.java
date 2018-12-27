@@ -84,7 +84,7 @@ public class CartController {
             ModelAndView modelAndView = new ModelAndView("redirect:/account");
             return modelAndView;
        } else {
-           ModelAndView modelAndView = new ModelAndView("orders/thanks");
+           ModelAndView modelAndView = new ModelAndView("order/thanks");
            return modelAndView;
        }
     }

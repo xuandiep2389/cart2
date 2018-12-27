@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Information</title>
+</head>
+<body>
+<h3>Please enter your information </h3>
+
+<th:block th:if="message">
+    <span style="color: green" th:text="${message}"></span>
+</th:block>
+<form method="post" th:object="${order}" th:action="@{/order/create}">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{customerName}"></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" th:field="*{customerAddress}"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{customerEmail}"></td>
+        </tr>
+        <tr>
+            <td>Phone number:</td>
+            <td><input type="text" th:field="*{customerPhone}"></td>
+        </tr>
+            <input type="hidden" th:field="*{orderDate}" id="order_date">
+        <tr>
+            <td>
+                <input type="submit" value="Submit">
+            </td>
+        </tr>
+    </table>
+    <a href="/products">Continue shopping</a> |
+    <a href="/cart">View my cart</a> |
+    <a HREF="/orderinfo/view">View your order information</a>
+</form>
+</body>
+</html>

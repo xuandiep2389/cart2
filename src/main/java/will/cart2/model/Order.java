@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "orders", //
-    uniqueConstraints =  {@UniqueConstraint(columnNames = "oder_num")} )
+@Table(name = "orders")
 public class Order {
 
     private static final long serialVersionUID = -2576670215015463100L;
@@ -16,24 +15,22 @@ public class Order {
     private int id;
 
     @Column(name = "order_date")
-    private Date orderDate;
+    private String orderDate;
 
-    @Column(name = "amount", nullable = false)
-    private double amount;
-
-    @Column(name = "customer_name", length = 255, nullable = false)
+    @Column(name = "customer_name")
     private String customerName;
 
-    @Column(name = "customer_address", length = 255, nullable = false)
+    @Column(name = "customer_address")
     private String customerAddress;
 
-    @Column(name = "customer_email", length = 128, nullable = false)
+    @Column(name = "customer_email")
     private String customerEmail;
 
-    public Order(int id, Date orderDate, double amount, String customerName, String customerAddress, String customerEmail, String customerPhone) {
-        this.id = id;
+    @Column(name = "customer_phone", length = 128, nullable = false)
+    private String customerPhone;
+
+    public Order(String orderDate, String customerName, String customerAddress, String customerEmail, String customerPhone) {
         this.orderDate = orderDate;
-        this.amount = amount;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerEmail = customerEmail;
@@ -55,20 +52,12 @@ public class Order {
         this.id = id;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getCustomerName() {
@@ -103,6 +92,5 @@ public class Order {
         this.customerPhone = customerPhone;
     }
 
-    @Column(name = "customer_phone", length = 128, nullable = false)
-    private String customerPhone;
+
 }
