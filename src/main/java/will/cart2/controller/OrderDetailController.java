@@ -3,6 +3,7 @@ package will.cart2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,18 @@ public class OrderDetailController {
         Order order1 = (Order) session.getAttribute("order1");
         session.setAttribute("order1",order1);
 
+        return modelAndView;
+    }
+
+    @PostMapping("/save")
+    public ModelAndView saveOrderDetails(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/order-detail/thanks");
+        return modelAndView;
+    }
+
+    @GetMapping("/thanks")
+    public ModelAndView thanks(){
+        ModelAndView modelAndView = new ModelAndView("order-detail/thanks");
         return modelAndView;
     }
 
