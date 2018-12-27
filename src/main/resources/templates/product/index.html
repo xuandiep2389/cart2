@@ -14,7 +14,7 @@
             <th>Name</th>
             <th>Photo</th>
             <th>Price</th>
-            <th>Buy</th>
+            <th></th>
         </tr>
         <th:block th:each="product : ${products}">
             <tr>
@@ -22,7 +22,7 @@
                 <td th:text="${product.name}"></td>
                 <td><img th:src="${product.photo}" th:width="100px"></td>
                 <td th:text="${product.price}"></td>
-                <td><a th:href="@{/cart/buy/__${product.id}__}">Buy now</a></td>
+                <td><a th:href="@{/cart/buy/__${product.id}__}">Add to cart</a></td>
             </tr>
         </th:block>
     </table>

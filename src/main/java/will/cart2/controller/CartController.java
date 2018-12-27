@@ -50,7 +50,6 @@ public class CartController {
     @GetMapping("")
     public ModelAndView showIndex(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("cart/index");
-       // modelAndView.addObject("totalMoney", totalMoney(session));
         return modelAndView;
     }
 
