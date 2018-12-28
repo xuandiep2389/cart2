@@ -36,7 +36,7 @@ public class CartController {
             cart = (List<Item>) session.getAttribute("cart");
             int index = isExists(id, cart);
             if (index == -1) {
-                cart.add(new Item(productService.findById(id), 1));
+                cart.add(new Item(productService.findById(id),  1));
             }else {
                 int quantity = cart.get(index).getQuantity() + 1;
                 cart.get(index).setQuantity(quantity);
