@@ -35,6 +35,7 @@ public class OrderController {
         order.setOrderDate(orderDate);
         Order order1 = order;
         session.setAttribute("order1", order1);
+        orderService.save(order1);
         modelAndView.addObject("order",new Order());
         modelAndView.addObject("message","Update your information success");
         return modelAndView;

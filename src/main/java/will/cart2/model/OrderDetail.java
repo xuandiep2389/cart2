@@ -16,22 +16,23 @@ public class OrderDetail implements Serializable {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, //
+    @JoinColumn(name = "order_id", //
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_ORD_FK"))
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false, //
+    @JoinColumn(name = "product_id", //
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
     private Product product;
 
-    @Column(name = "quantity", nullable = false)
+
+    @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private double price;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private double amount;
 
 
