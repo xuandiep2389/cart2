@@ -1,7 +1,6 @@
 package will.cart2.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,8 +27,29 @@ public class Order {
     @Column(name = "customer_email")
     private String customerEmail;
 
-    @Column(name = "customer_phone", length = 128, nullable = false)
+    public Order(String orderDate, String customerName, String customerAddress, String customerEmail, String customerPhone, String orderInfo, Set<Product> products) {
+        this.orderDate = orderDate;
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone;
+        this.orderInfo = orderInfo;
+        this.products = products;
+    }
+
+    public String getOrderInfo() {
+        return orderInfo;
+    }
+
+    public void setOrderInfo(String orderInfo) {
+        this.orderInfo = orderInfo;
+    }
+
+    @Column(name = "customer_phone", length = 128)
     private String customerPhone;
+
+    @Column(name = "order_info")
+    private String orderInfo;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

@@ -1,5 +1,7 @@
 package will.cart2.model;
 
+import javax.persistence.Entity;
+
 public class Item {
 
     private Product product;

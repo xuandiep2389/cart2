@@ -6,14 +6,49 @@
 </head>
 <body>
 <h3>View</h3>
+<div>
+    <table>
+        <tr>
+            <td>Date:</td>
+            <td th:text="${orderDetail.order.orderDate}"></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${orderDetail.order.customerName}"></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td th:text="${orderDetail.order.customerName}"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td th:text="${orderDetail.order.customerEmail}"></td>
+        </tr>
+        <tr>
+            <td>Phone number:</td>
+            <td th:text="${orderDetail.order.customerPhone}"></td>
+        </tr>
+    </table>
+</div>
 <table border="1">
+    <tr th:rowspan="3" th:text="${orderDetail.order.orderInfo}">
+
+    </tr>
     <tr>
         <td>Product:</td>
+        <td>Price: </td>
+        <td>Quantity: </td>
     </tr>
     <tr th:each="product : ${orderDetail.order.products}">
         <td th:text="${product.name}"></td>
-
+        <td th:text="${product.price}"> </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">Total: </td>
+        <td th:text="${orderDetail.amount}"></td>
     </tr>
 </table>
+
 </body>
 </html>
