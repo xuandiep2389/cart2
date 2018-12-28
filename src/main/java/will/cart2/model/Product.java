@@ -1,6 +1,8 @@
 package will.cart2.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -13,6 +15,24 @@ public class Product {
     private String name;
     private String photo;
     private double price;
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Product(String name, String photo, double price, Set<Order> orders) {
+        this.name = name;
+        this.photo = photo;
+        this.price = price;
+        this.orders = orders;
+    }
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Order> orders = new HashSet<>();
 
     public Integer getId() {
         return id;

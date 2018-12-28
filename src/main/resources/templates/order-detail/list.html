@@ -23,9 +23,9 @@
             <td th:text="${od.order.customerPhone}"></td>
             <td th:text="${od.order.customerAddress}"></td>
             <td th:text="${od.amount}" style="color: green"></td>
+            <td><a th:href="@{/order-detail/detail/__${od.id}__}">View</a></td>
         </tr>
     </th:block>
-
 </table>
 </body>
 </html>
