@@ -1,6 +1,7 @@
 package will.cart2.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,12 +20,16 @@ public class Order {
     private String orderDate;
 
     @Column(name = "customer_name")
+    @Size(min = 2,message = "Name must contain at least 2 character")
     private String customerName;
 
     @Column(name = "customer_address")
+    @NotEmpty(message = "Address must not be empty")
     private String customerAddress;
 
     @Column(name = "customer_email")
+    @Email
+    @NotBlank(message = "Email must not be empty")
     private String customerEmail;
 
     public Order(String orderDate, String customerName, String customerAddress, String customerEmail, String customerPhone, String orderInfo, Set<Product> products) {
@@ -46,6 +51,7 @@ public class Order {
     }
 
     @Column(name = "customer_phone", length = 128)
+    @Pattern(regexp = "0[0-9]{9,10}", message = "Wrong phone number format")
     private String customerPhone;
 
     @Column(name = "order_info")

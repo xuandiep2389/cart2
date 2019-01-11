@@ -56,11 +56,9 @@ public class OrderDetailController {
         orderDetail.setAmount(total_money);
         String orderInfo = "";
         for (int i = 0; i < cart.size(); i++) {
-             orderInfo += "Product: " + cart.get(i).getProduct().getName() + "/" + "Quantity: " +cart.get(i).getQuantity() + ",";
+             orderInfo += cart.get(i).getProduct().getName() + " : " +cart.get(i).getQuantity() + " , ";
         }
         order1.setOrderInfo(orderInfo);
-
-
         orderService.save(order1);
         orderDetailService.save(orderDetail);
 

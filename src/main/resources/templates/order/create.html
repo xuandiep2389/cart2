@@ -5,28 +5,33 @@
     <title>User Information</title>
 </head>
 <body>
-<h3>Please enter your information </h3>
+<h2>Please enter your information </h2>
 
 <th:block th:if="message">
-    <span style="color: green" th:text="${message}"></span>
+    <h3><span style="color: green" th:text="${message}"></span></h3>
 </th:block>
 <form method="post" th:object="${order}" th:action="@{/order/create}">
     <table>
         <tr>
             <td>Name:</td>
             <td><input type="text" th:field="*{customerName}"></td>
+            <td th:if="${#fields.hasErrors('customerName')}" style="color: green" th:errors="*{customerName}">Name error</td>
         </tr>
         <tr>
             <td>Address:</td>
             <td><input type="text" th:field="*{customerAddress}"></td>
+            <td th:if="${#fields.hasErrors('customerAddress')}" style="color: green" th:errors="*{customerAddress}">Address error</td>
         </tr>
         <tr>
             <td>Email:</td>
             <td><input type="text" th:field="*{customerEmail}"></td>
+            <td th:if="${#fields.hasErrors('customerEmail')}" style="color: green" th:errors="*{customerEmail}">Email error</td>
+
         </tr>
         <tr>
             <td>Phone number:</td>
             <td><input type="text" th:field="*{customerPhone}"></td>
+            <td th:if="${#fields.hasErrors('customerPhone')}" style="color: green" th:errors="*{customerPhone}">Phone number error</td>
         </tr>
             <input type="hidden" th:field="*{orderDate}" id="order_date">
         <tr>
